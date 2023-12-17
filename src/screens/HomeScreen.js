@@ -10,6 +10,7 @@ export default function App() {
   const [messages, setMessages] = useState(dummyMessages);
   const [recording, setRecording] = useState(false);
   const [speaking, setSpeaking] = useState(false);
+  const [result, setResult] = useState(''); //결과를 받아온다
 
   //이벤트 핸들러를 이용해서 녹음 상황을 관리하고 그 내용을 콘솔에 출력한다. 
   const speechStartHandler = e => {
@@ -23,6 +24,8 @@ export default function App() {
 
   const speechResultHandler = e => {
     console.log('voice event:', e);
+    const text = e.value[0]; //text 상수는 음성인식 이벤트의 결과(콘솔에 찍힘)
+    setResult(text);
   }
 
   const speechErrorHandler = e => {
@@ -64,6 +67,9 @@ export default function App() {
       Voice.destroy().then(Voice.removeAllListeners)
     }
   }, [])
+
+  console.log('result: ', result);
+  //정상적으로 결과를 세팅했는지 확인하기 위해서 콘솔에 출력 
 
   return (
     <View className="flex-1 bg-white">
