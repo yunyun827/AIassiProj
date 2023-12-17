@@ -1,8 +1,9 @@
 import { View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Features from '../components/Features';
 import { dummyMessages } from '../constants';
+import Voice from '@react-native-community/voice';
 
 
 export default function App() {
@@ -10,12 +11,59 @@ export default function App() {
   const [recording, setRecording] = useState(false);
   const [speaking, setSpeaking] = useState(false);
 
+  //이벤트 핸들러를 이용해서 녹음 상황을 관리하고 그 내용을 콘솔에 출력한다. 
+  const speechStartHandler = e => {
+    console.log('speech start handler');
+  }
+
+  const speechEndHandler = e => {
+    setRecording(false);
+    console.log('speech end handler');
+  }
+
+  const speechResultHandler = e => {
+    console.log('voice event:', e);
+  }
+
+  const speechErrorHandler = e => {
+    console.log('speech error handler:', e);
+  }
+
+  const startRecoding = async () => {
+    setRecording(true); //녹음 상태를 참으로 설정
+    try{
+      await Voice.start('en-GB'); //음성인식을 시작한다.
+    }catch{console.log('error: ', error)}
+  }
+
+  const stopRecoding = async () => {
+    setRecording(true);
+    try{
+      await Voice.stop();
+      setRecording(false);
+      //녹음을 멈추고 AI의 답변을 fetch할 시간을 가짐
+    }catch(error){console.log('error: ', error)}
+  }
+
   const clear = ()=>{
     setMessages([])
   }
   const stopSpeaking = () => {
     setSpeaking(false); // 말하기 상태를 false로 변경.
   }
+
+  useEffect(()=> {
+    //voice handler 사용 
+    Voice.onSpeechStart = speechStartHandler;
+    Voice.onSpeechEnd = speechEndHandler;
+    Voice.onSpeechResults = speechResultHandler;
+    Voice.onSpeechError = speechErrorHandler;
+
+    return () => {
+      //초기화 
+      Voice.destroy().then(Voice.removeAllListeners)
+    }
+  }, [])
 
   return (
     <View className="flex-1 bg-white">
@@ -100,14 +148,16 @@ export default function App() {
         <View className="flex justify-center items-center">
           {
             recording ? ( //녹음중인 경우
-              <TouchableOpacity>
+              <TouchableOpacity onPress={stopRecoding}>
+                {/* 녹음 정지 버튼 */}
                 <Image
                   className="rounded-full"
                   source={require('../../assets/images/voiceLoading.gif')}
                   style={{ width: hp(10), height: hp(10) }} />
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity>
+              <TouchableOpacity onPress={startRecoding}>
+                {/* 녹음 시작 버튼 */}
                 <Image
                   className="rounded-full"
                   source={require('../../assets/images/recordingIcon.png')}
