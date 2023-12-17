@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function App() {
   const navigation = useNavigation();
   return (
+    <View className="flex-1 bg-white">
     <SafeAreaView calssName="flex-1 flex justify-around bg-white">
       <View calssName="space-y-2">
         <Text style={{fontSize: wp(10)}} className="text-center text-4xl font-bold text-gray-700">
@@ -25,7 +26,7 @@ export default function App() {
       </TouchableOpacity>
 
     </SafeAreaView>
-
+    </View>
   )
 
 }
