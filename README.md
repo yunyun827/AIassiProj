@@ -1,4 +1,5 @@
-##MATE - My AI Teacher for English
+##MATE
+- My AI Teacher for English
 2023 모바일앱제작 수업 개인 기말 프로젝트 과제입니다.
 (This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).)
 
