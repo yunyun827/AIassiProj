@@ -3,6 +3,8 @@
 - ![1](https://github.com/yunyun827/My-AI-Teacher-for-English/assets/138848565/dd130766-e83a-4e56-a57a-20b010e6f1ee)
 
 This is a React Native project to improve English conversation skill, by verbally speaking and listening to AI teacher, using Open AI API.
+
+
 ⭐️ You can check Demo Video: https://youtu.be/uhS5ZTwNjCY (Korean)
 
 
