@@ -3,7 +3,8 @@
 - ![1](https://github.com/yunyun827/My-AI-Teacher-for-English/assets/138848565/dd130766-e83a-4e56-a57a-20b010e6f1ee)
 
 This is a React Native project to improve English conversation skill, by verbally speaking and listening to AI teacher, using Open AI API.
-Demo Video: https://youtu.be/uhS5ZTwNjCY (Korean)
+⭐️ You can check Demo Video: https://youtu.be/uhS5ZTwNjCY (Korean)
+
 
 * This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).)
 * Referred tutorial from 'Code with Nomi'(https://youtu.be/nf3t5p2a5Dg?si=eQcVoC1rfG812JvU)
